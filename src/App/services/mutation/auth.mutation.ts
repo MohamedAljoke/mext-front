@@ -6,14 +6,14 @@ import {
   RegisterSchemaType,
 } from '../api/schemas/Auth.Schema';
 
-export const signin = async (
+export const signinService = async (
   body: LoginSchemaType
 ): Promise<LoginResponseType> => {
   const response = await api.post('/auth/login', body);
   return response?.data;
 };
 
-export const register = async (
+export const registerService = async (
   body: RegisterSchemaType
 ): Promise<RegisterResponseType> => {
   const response = await api.post('/auth/register', body);

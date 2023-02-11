@@ -11,7 +11,7 @@ import {
   LoginSchemaType,
 } from '@/App/services/api/schemas/Auth.Schema';
 import { useMutation } from 'react-query';
-import { signin } from '@/App/services/mutation/auth.mutation';
+import { signinService } from '@/App/services/mutation/auth.mutation';
 
 export default function Signin() {
   const {
@@ -22,7 +22,7 @@ export default function Signin() {
     resolver: zodResolver(LoginSchema),
   });
 
-  const { mutate: mutateLogin } = useMutation(signin);
+  const { mutate: mutateLogin } = useMutation(signinService);
 
   const onSubmit: SubmitHandler<LoginSchemaType> = (data) => {
     mutateLogin(data, {

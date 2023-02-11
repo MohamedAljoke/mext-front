@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import CustomButton from '@/App/shared/common/Button/Button';
 import CustomInput from '@/App/shared/common/Input/Input';
@@ -6,24 +7,30 @@ import { HiOutlineMail } from 'react-icons/hi';
 import { AiOutlineLock } from 'react-icons/ai';
 import { MdOutlinePersonOutline } from 'react-icons/md';
 import Link from 'next/link';
-
-type SignupFormTypes = {
-  name: string;
-  email: string;
-  password: string;
-  password_confirmation: string;
-};
+import { useMutation } from 'react-query';
+import { registerService } from '@/App/services/mutation/auth.mutation';
+import {
+  RegisterSchema,
+  RegisterSchemaType,
+} from '@/App/services/api/schemas/Auth.Schema';
 
 export default function Signup() {
+  const { mutate: mutateRegister } = useMutation(registerService);
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm<SignupFormTypes>();
+  } = useForm<RegisterSchemaType>({
+    resolver: zodResolver(RegisterSchema),
+  });
 
-  const onSubmit: SubmitHandler<SignupFormTypes> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<RegisterSchemaType> = (data) => {
+    mutateRegister(data, {
+      onSuccess: (response) => {
+        console.log(response);
+      },
+      onError: () => {},
+    });
   };
   return (
     <div className="flex  justify-center items-center bg-white50 h-screen">
