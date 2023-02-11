@@ -5,21 +5,16 @@ import React from 'react';
 import { HiOutlineMail } from 'react-icons/hi';
 import { AiOutlineLock } from 'react-icons/ai';
 import Link from 'next/link';
-import { useQuery } from 'react-query';
-
-type LoginFormTypes = {
-  email: string;
-  password: string;
-};
+import { LoginSchemaType } from '@/App/services/api/schemas/Auth.Schema';
 
 export default function Signin() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormTypes>();
+  } = useForm<LoginSchemaType>();
 
-  const onSubmit: SubmitHandler<LoginFormTypes> = (data) => {
+  const onSubmit: SubmitHandler<LoginSchemaType> = (data) => {
     console.log(data);
   };
   return (
