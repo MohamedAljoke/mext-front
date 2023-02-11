@@ -1,19 +1,26 @@
 import React, { InputHTMLAttributes } from 'react';
+import { FieldValues, UseFormRegister } from 'react-hook-form';
 
 interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   icon?: JSX.Element;
   placeholder?: string;
+  isRequired?: boolean;
+  inputOptions?: Object;
+  register: UseFormRegister<FieldValues> | any;
   type: string;
   name: string;
 }
 
 export default function CustomInput({
   label,
+  isRequired = false,
   icon,
   type,
   name,
+  inputOptions,
   placeholder,
+  register,
   ...rest
 }: IInputProps) {
   return (
@@ -29,8 +36,15 @@ export default function CustomInput({
           {icon}
         </div>
         <input
-          type={type}
+          {...register(name, {
+            required: {
+              value: isRequired,
+              message: 'This field is required',
+            },
+            ...inputOptions,
+          })}
           name={name}
+          type={type}
           id={label}
           className="block w-full rounded-md border-gray-300 pl-10 focus:border-darkBlue focus:ring-darkBlue sm:text-sm"
           placeholder={placeholder}
