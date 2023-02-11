@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const API: string =
-  process.env.API_BASE_URL || 'http://54.233.146.252:3333/api/v1';
+  process.env.API_BASE_URL || 'http://127.0.0.1:8000/api/v1';
 
 export const defaultParams = () => {
   return {

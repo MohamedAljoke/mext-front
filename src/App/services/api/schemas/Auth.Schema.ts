@@ -1,4 +1,4 @@
-import { object, number, string, TypeOf } from 'zod';
+import { object, number, string, TypeOf, date } from 'zod';
 
 export const LoginSchema = object({
   email: string()
@@ -6,13 +6,13 @@ export const LoginSchema = object({
     .email({ message: 'must be email' })
     .max(155, 'max.caracteres 80'),
   password: string()
-    .min(1, { message: 'Password is required' })
+    .min(8, { message: 'Password must be longer than 8' })
     .max(155, 'max.caracteres 50'),
 });
 
 export type LoginSchemaType = TypeOf<typeof LoginSchema>;
 
-export const LoginResponse = object({
+export const LoginResponseSchema = object({
   id: number(),
   type: string(),
   token: string(),
@@ -21,7 +21,7 @@ export const LoginResponse = object({
   email: string(),
 });
 
-export type LoginResponseType = TypeOf<typeof LoginResponse>;
+export type LoginResponseType = TypeOf<typeof LoginResponseSchema>;
 
 export const RegisterSchema = object({
   name: string().min(1, 'Name is required').max(155, 'max.caracteres 80'),
@@ -29,11 +29,11 @@ export const RegisterSchema = object({
     .min(1, 'Email is required')
     .email({ message: 'must be email' }),
   password: string()
-    .min(1, { message: 'Password is required' })
+    .min(8, { message: 'Password must be longer than 8' })
     .max(155, 'max.caracteres 50')
     .optional(),
   password_confirmation: string()
-    .min(1, { message: 'password confirmation is required' })
+    .min(8, { message: 'password confirmation must be longer than 8' })
     .max(155, 'max.caracteres 50')
     .optional(),
 }).refine((data) => data.password === data.password_confirmation, {
@@ -41,3 +41,12 @@ export const RegisterSchema = object({
 });
 
 export type RegisterSchemaType = TypeOf<typeof RegisterSchema>;
+
+export const RegisterResponseSchema = object({
+  id: number(),
+  email: string(),
+  name: string(),
+  created_at: date(),
+  updated_at: date(),
+});
+export type RegisterResponseType = TypeOf<typeof RegisterResponseSchema>;

@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import CustomButton from '@/App/shared/common/Button/Button';
 import CustomInput from '@/App/shared/common/Input/Input';
@@ -5,17 +6,31 @@ import React from 'react';
 import { HiOutlineMail } from 'react-icons/hi';
 import { AiOutlineLock } from 'react-icons/ai';
 import Link from 'next/link';
-import { LoginSchemaType } from '@/App/services/api/schemas/Auth.Schema';
+import {
+  LoginSchema,
+  LoginSchemaType,
+} from '@/App/services/api/schemas/Auth.Schema';
+import { useMutation } from 'react-query';
+import { signin } from '@/App/services/mutation/auth.mutation';
 
 export default function Signin() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginSchemaType>();
+  } = useForm<LoginSchemaType>({
+    resolver: zodResolver(LoginSchema),
+  });
+
+  const { mutate: mutateLogin } = useMutation(signin);
 
   const onSubmit: SubmitHandler<LoginSchemaType> = (data) => {
-    console.log(data);
+    mutateLogin(data, {
+      onSuccess: (response) => {
+        console.log(response);
+      },
+      onError: () => {},
+    });
   };
   return (
     <div className="flex  justify-center items-center bg-white50 h-screen">
