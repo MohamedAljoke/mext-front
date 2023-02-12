@@ -1,4 +1,4 @@
-import { post } from '../api/axios';
+import { get, post } from '../api/axios';
 import { api } from '../api/axios/axios';
 import {
   LoginResponseType,
@@ -34,3 +34,7 @@ export const validateAndRefreshToken =
     });
     return response;
   };
+
+export const logout = async () => {
+  await get('/auth/logout');
+};
