@@ -12,9 +12,11 @@ import {
 } from '@/App/services/api/schemas/Auth.Schema';
 import { useMutation } from 'react-query';
 import { signinService } from '@/App/services/mutation/auth.mutation';
-import Spinner from '@/App/components/Loading/Loader';
+import { saveToken } from '@/App/utils/constants/tokens';
+import { useRouter } from 'next/router';
 
 export default function Signin() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -28,7 +30,8 @@ export default function Signin() {
   const onSubmit: SubmitHandler<LoginSchemaType> = (data) => {
     mutateLogin(data, {
       onSuccess: (response) => {
-        console.log(response);
+        saveToken(response?.token || '');
+        router.push('/');
       },
       onError: () => {},
     });

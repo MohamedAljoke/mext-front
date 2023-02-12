@@ -1,6 +1,9 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Spinner from '../components/Loading/Loader';
+import { validateAndRefreshToken } from '../services/mutation/auth.mutation';
+import { useMutation } from 'react-query';
+import { saveToken } from '../utils/constants/tokens';
 
 interface Props {
   children: JSX.Element;
@@ -12,22 +15,21 @@ const PrivateRoute: React.FC<Props> = ({ children }) => {
   const handleComplete = () => {
     setIsLoading(false);
   };
-  useEffect(() => {
-    router.events.on('routeChangeComplete', handleComplete);
-    router.events.on('routeChangeError', handleComplete);
-    return () => {
-      router.events.off('routeChangeComplete', handleComplete);
-      router.events.off('routeChangeError', handleComplete);
-    };
-  }, [router]);
+  const { mutate: mutateValidateToken } = useMutation(validateAndRefreshToken);
   useEffect(() => {
     async function checkIsLoggedIn() {
-      const isLoggedIn = false;
-      if (isLoggedIn) {
-        router.push('/');
-      } else {
-        router.push('/signin');
-      }
+      mutateValidateToken(
+        {},
+        {
+          onSuccess: (response) => {
+            handleComplete();
+            saveToken(response?.token || '');
+          },
+          onError: () => {
+            router.push('/signin');
+          },
+        }
+      );
     }
     checkIsLoggedIn();
   }, []);
