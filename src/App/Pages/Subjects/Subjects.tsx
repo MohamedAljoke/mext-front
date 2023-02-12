@@ -1,18 +1,15 @@
 import React from 'react';
 import SubjectCard from './components/SubjectCard';
 import { customColors } from '@/App/utils/constants/colors';
+import { useFetchUserCoordinates } from '@/App/services/query/subjects.query';
 
 export default function Subjects() {
-  const listOfTitles = ['Physics', 'Mathematics'];
+  const { subjects, isLoading, isError, refetch } = useFetchUserCoordinates();
   return (
     <div className="flex flex-wrap gap-6  justify-center items-center">
-      {listOfTitles.map((item, idx) => {
+      {subjects?.map((item, idx) => {
         return (
-          <SubjectCard
-            key={idx}
-            subjectTitle={item}
-            bgColor={customColors[idx]}
-          />
+          <SubjectCard key={idx} subject={item} bgColor={customColors[idx]} />
         );
       })}
     </div>

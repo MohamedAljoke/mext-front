@@ -1,5 +1,4 @@
 import { get, post } from '../api/axios';
-import { api } from '../api/axios/axios';
 import {
   LoginResponseType,
   LoginSchemaType,
