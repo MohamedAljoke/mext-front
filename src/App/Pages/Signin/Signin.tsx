@@ -15,6 +15,7 @@ import { signinService } from '@/App/services/mutation/auth.mutation';
 import { saveToken } from '@/App/utils/constants/tokens';
 import { useRouter } from 'next/router';
 import { popError } from '@/App/components/PopUp/popError';
+import { popSucess } from '@/App/components/PopUp/popSuccess';
 
 export default function Signin() {
   const router = useRouter();
@@ -31,11 +32,14 @@ export default function Signin() {
   const onSubmit: SubmitHandler<LoginSchemaType> = (data) => {
     mutateLogin(data, {
       onSuccess: (response) => {
+        popSucess('Logged in');
         saveToken(response?.token || '');
         router.push('/');
       },
-      onError: () => {
-        popError('email ou senha incorreto!');
+      onError: (error: any) => {
+        const errorMessage =
+          error?.response?.data?.error || 'password or email are incorrect';
+        popError(errorMessage);
       },
     });
   };

@@ -15,6 +15,7 @@ import {
 } from '@/App/services/api/schemas/Auth.Schema';
 import { useRouter } from 'next/router';
 import { popError } from '@/App/components/PopUp/popError';
+import { popSucess } from '@/App/components/PopUp/popSuccess';
 
 export default function Signup() {
   const router = useRouter();
@@ -31,9 +32,12 @@ export default function Signup() {
     mutateRegister(data, {
       onSuccess: (response) => {
         router.push('/signin');
+        popSucess('Registered new user');
       },
-      onError: () => {
-        popError('email ou senha incorreto!');
+      onError: (error: any) => {
+        const errorMessage =
+          error?.response?.data?.error || 'password or email are incorrect';
+        popError(errorMessage);
       },
     });
   };
