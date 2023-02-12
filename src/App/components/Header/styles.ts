@@ -6,7 +6,7 @@ justify-between
 items-center 
 px-2 
 py-2 
-bg-lightBlack 
+bg-darkBlue
 z-50
 h-16
 fixed

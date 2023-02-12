@@ -1,3 +1,4 @@
+import Subjects from '@/App/Pages/Subjects/Subjects';
 import Header from '@/App/components/Header/Header';
 import PrivateRoute from '@/App/hook/PrivateRoute';
 import Head from 'next/head';
@@ -14,12 +15,8 @@ export default function Home() {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <Header />
-        <main className="flex  justify-center items-center h-screen">
-          <Link href="signin">
-            <h1 className="text-3xl font-bold underline text-red-500">
-              AINDA NÃO TEM NADA VAI PARA LOGIN
-            </h1>
-          </Link>
+        <main className="flex  justify-center items-center h-screen ">
+          <Subjects />
         </main>
       </>
     </PrivateRoute>
