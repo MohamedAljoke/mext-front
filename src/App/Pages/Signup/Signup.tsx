@@ -13,8 +13,11 @@ import {
   RegisterSchema,
   RegisterSchemaType,
 } from '@/App/services/api/schemas/Auth.Schema';
+import { useRouter } from 'next/router';
+import { popError } from '@/App/components/PopUp/popError';
 
 export default function Signup() {
+  const router = useRouter();
   const { mutate: mutateRegister } = useMutation(registerService);
   const {
     register,
@@ -27,9 +30,11 @@ export default function Signup() {
   const onSubmit: SubmitHandler<RegisterSchemaType> = (data) => {
     mutateRegister(data, {
       onSuccess: (response) => {
-        console.log(response);
+        router.push('/signin');
       },
-      onError: () => {},
+      onError: () => {
+        popError('email ou senha incorreto!');
+      },
     });
   };
   return (
