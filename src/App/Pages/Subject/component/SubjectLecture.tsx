@@ -2,6 +2,7 @@ import React from 'react';
 import { Disclosure } from '@headlessui/react';
 import { FiChevronUp } from 'react-icons/fi';
 import { ChapterSchemaType } from '@/App/services/api/schemas/Chapter.Schema';
+import Link from 'next/link';
 
 export default function SubjectLecture({
   chapter,
@@ -25,9 +26,11 @@ export default function SubjectLecture({
               <ul className="list-disc">
                 {chapter.lectuers.map((lectuer) => {
                   return (
-                    <li key={lectuer.id} className="py-2 cursor-pointer">
-                      {lectuer.lecture_name}
-                    </li>
+                    <Link key={lectuer.id} href={`/lectuer/${lectuer.id}`}>
+                      <li className="py-2 cursor-pointer">
+                        {lectuer.lecture_name}
+                      </li>
+                    </Link>
                   );
                 })}
               </ul>
