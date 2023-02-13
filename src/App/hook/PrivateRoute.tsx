@@ -4,13 +4,14 @@ import Spinner from '../components/Loading/Loader';
 import { validateAndRefreshToken } from '../services/mutation/auth.mutation';
 import { useMutation } from 'react-query';
 import { saveToken } from '../utils/constants/tokens';
+import Header from '../components/Header/Header';
 
 interface Props {
   children: JSX.Element;
-  setUser: Dispatch<SetStateAction<string>>;
 }
 
-const PrivateRoute: React.FC<Props> = ({ children, setUser }) => {
+const PrivateRoute: React.FC<Props> = ({ children }) => {
+  const [user, setUser] = useState('');
   const [isLoading, setIsLoading] = useState(true); //muda para true dps
   const router = useRouter();
   const handleComplete = () => {
@@ -40,7 +41,10 @@ const PrivateRoute: React.FC<Props> = ({ children, setUser }) => {
       <Spinner />
     </div>
   ) : (
-    children
+    <>
+      <Header user={user} />
+      {children}
+    </>
   );
 };
 

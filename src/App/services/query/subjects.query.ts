@@ -30,10 +30,14 @@ export const useGetSubject = ({ subjectId }: { subjectId: string }) => {
     isLoading,
     isError,
     refetch,
-  } = useQuery<SubjectSchemaType>(
-    [choosenSubject],
+  } = useQuery<SubjectSchemaType | null>(
+    [choosenSubject, subjectId],
     async () => {
-      return getSubject(subjectId);
+      if (subjectId) {
+        return getSubject(subjectId);
+      } else {
+        return null;
+      }
     },
     {
       refetchOnWindowFocus: false,

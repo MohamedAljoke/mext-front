@@ -5,9 +5,8 @@ import Head from 'next/head';
 import { useState } from 'react';
 
 export default function Home() {
-  const [user, setUser] = useState<string>('');
   return (
-    <PrivateRoute setUser={setUser}>
+    <PrivateRoute>
       <>
         <Head>
           <title>Mext plataform</title>
@@ -15,7 +14,6 @@ export default function Home() {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Header user={user} />
         <main className="flex  justify-center items-center h-screen ">
           <Subjects />
         </main>
