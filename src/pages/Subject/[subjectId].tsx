@@ -5,9 +5,7 @@ import React from 'react';
 export default function SubjectPage() {
   return (
     <PrivateRoute>
-      <>
-        <Subject />;
-      </>
+      <Subject />
     </PrivateRoute>
   );
 }

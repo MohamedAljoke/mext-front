@@ -20,14 +20,18 @@ export default function Header({ user }: { user: string }) {
 
   return (
     <HeaderDiv>
-      <div className="flex cursor-pointer">
-        <img
-          className="h-8 w-auto sm:h-10 ml-8"
-          src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-          alt=""
-        />
-        <p className="text-white font-bold text-l ml-8 pt-2">Mext plataform</p>
-      </div>
+      <Link href="/">
+        <div className="flex cursor-pointer">
+          <img
+            className="h-8 w-auto sm:h-10 ml-8"
+            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            alt=""
+          />
+          <p className="text-white font-bold text-l ml-8 pt-2">
+            Mext plataform
+          </p>
+        </div>
+      </Link>
       <div className="flex items-center mr-8">
         {/* Profile dropdown */}
         <Menu data-testid="test-profile-menu" as="div" className="relative">
