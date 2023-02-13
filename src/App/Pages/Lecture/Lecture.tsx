@@ -2,10 +2,11 @@ import Spinner from '@/App/components/Loading/Loader';
 import { useGetLectuer } from '@/App/services/query/lectuer.query';
 import { useRouter } from 'next/router';
 import React from 'react';
+import LectuerVideo from './components/Video/LectuerVideo';
 
 export default function Lecture() {
   const router = useRouter();
-  const lectuerId = router.query.lectureId as string;
+  const lectuerId = router.query.lectuerId as string;
   const { lectuer, isLoading, isError, refetch } = useGetLectuer({
     lectuerId,
   });
@@ -17,7 +18,10 @@ export default function Lecture() {
             <Spinner />
           </div>
         ) : (
-          <h2>{lectuer?.lecture_name}</h2>
+          <>
+            <h2 className="font-bold text-xl">{lectuer?.lecture_name}</h2>
+            <LectuerVideo />
+          </>
         )}
       </div>
     </div>
