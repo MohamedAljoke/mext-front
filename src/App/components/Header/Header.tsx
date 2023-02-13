@@ -11,7 +11,7 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Header() {
+export default function Header({ user }: { user: string }) {
   const handleLogout = () => {
     logout();
     popSucess('logout successfully');
@@ -26,9 +26,7 @@ export default function Header() {
           src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
           alt=""
         />
-        <p className="text-white font-bold text-l ml-8 pt-2">
-          Lorem ipsum dolor
-        </p>
+        <p className="text-white font-bold text-l ml-8 pt-2">Mext plataform</p>
       </div>
       <div className="flex items-center mr-8">
         {/* Profile dropdown */}
@@ -38,9 +36,7 @@ export default function Header() {
               data-testid="test-profile-toggle-button"
               className={menuButton}
             >
-              <p className="ml-2 text-white font-semibold text-sm">
-                Mohamed Ibrahim
-              </p>
+              <p className="ml-2 text-white font-semibold text-sm">{user}</p>
               <FiChevronDown className="text-white w-6 h-6" />
             </Menu.Button>
           </div>
