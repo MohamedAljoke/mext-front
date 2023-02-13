@@ -1,9 +1,12 @@
 import { useQuery } from 'react-query';
 import { SubjectSchemaType } from '../api/schemas/Subject.Schema';
-import { listOfSubjects } from '@/App/utils/constants/queryKeys';
-import { fetchSubjects } from '../mutation/subject.mutation';
+import {
+  choosenSubject,
+  listOfSubjects,
+} from '@/App/utils/constants/queryKeys';
+import { fetchSubjects, getSubject } from '../mutation/subject.mutation';
 
-export const useFetchUserCoordinates = () => {
+export const useFetchSubjects = () => {
   const {
     data: subjects,
     isLoading,
@@ -20,4 +23,22 @@ export const useFetchUserCoordinates = () => {
   );
 
   return { subjects, isLoading, isError, refetch };
+};
+export const useGetSubject = ({ subjectId }: { subjectId: string }) => {
+  const {
+    data: subject,
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery<SubjectSchemaType>(
+    [choosenSubject],
+    async () => {
+      return getSubject(subjectId);
+    },
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  return { subject, isLoading, isError, refetch };
 };
