@@ -1,4 +1,4 @@
-import { object, number, string, TypeOf, date, array } from 'zod';
+import { object, number, TypeOf, date } from 'zod';
 
 export const PdfSchema = object({
   id: number(),
