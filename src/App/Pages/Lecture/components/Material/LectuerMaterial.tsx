@@ -15,7 +15,7 @@ export default function LectuerMaterial({
         {pdfs?.map((pdf) => {
           return (
             <Link key={pdf.id} href={`/pdf/${pdf.id}`}>
-              <div className="flex flex-row px-8 min-w-[800px] rounded-xl mt-4 py-4 bg-[#E1F5FE] shadow-defaultShadow hover:bg-[#dbf3ff] cursor-pointer">
+              <div className="flex flex-row px-8 min-w-[200px] md:min-w-[400px] lg:min-w-[800px] rounded-xl mt-4 py-4 bg-[#E1F5FE] shadow-defaultShadow hover:bg-[#dbf3ff] cursor-pointer">
                 <AiOutlineFilePdf className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" />
                 <span>{pdf.pdf_name}</span>
               </div>

@@ -11,6 +11,7 @@ export default function Lecture() {
   const { lectuer, isLoading, isError, refetch } = useGetLectuer({
     lectuerId,
   });
+  console.log(lectuer);
   return (
     <div className="relative w-full">
       <div className="w-full flex flex-col gap-6  justify-center items-center xl:px-28 px-16 py-28 ">
