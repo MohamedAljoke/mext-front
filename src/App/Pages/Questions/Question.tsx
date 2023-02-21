@@ -58,7 +58,7 @@ export default function Question() {
     const questionColor =
       question.wasCorrect == true || responseStatus[question.id]
         ? 'text-green-600'
-        : question.wasCorrect == false
+        : question.wasCorrect == false || responseStatus[question.id] === false
         ? 'text-red-500'
         : 'text-gray-600';
     return questionColor;
