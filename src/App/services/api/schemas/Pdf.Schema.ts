@@ -1,9 +1,9 @@
-import { object, number, TypeOf, date } from 'zod';
+import { object, number, string, TypeOf, date } from 'zod';
 
 export const PdfSchema = object({
   id: number(),
   pdf_name: number(),
-  pdf_url: number().nullable(),
+  pdf_url: string(),
   created_at: date(),
   updated_at: date(),
 });

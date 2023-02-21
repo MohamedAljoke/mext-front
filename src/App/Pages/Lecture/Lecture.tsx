@@ -11,7 +11,6 @@ export default function Lecture() {
   const { lectuer, isLoading, isError, refetch } = useGetLectuer({
     lectuerId,
   });
-  console.log(lectuer);
   return (
     <div className="relative w-full">
       <div className="w-full flex flex-col gap-6  justify-center items-center xl:px-28 px-16 py-28 ">
@@ -19,12 +18,14 @@ export default function Lecture() {
           <div className="flex items-center justify-center h-screen">
             <Spinner />
           </div>
-        ) : (
+        ) : lectuer ? (
           <>
             <h2 className="font-bold text-xl">{lectuer?.lecture_name}</h2>
-            <LectuerVideo />
-            <LectuerMaterial pdfs={lectuer?.pdfs} />
+            <LectuerVideo video={lectuer?.video} />
+            <LectuerMaterial pdfs={lectuer?.pdfs} lectureId={lectuer.id} />
           </>
+        ) : (
+          <h2 className="font-bold text-xl">NO LECTURE WAS FOUND</h2>
         )}
       </div>
     </div>

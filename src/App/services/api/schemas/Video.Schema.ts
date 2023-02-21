@@ -2,8 +2,8 @@ import { object, number, string, TypeOf, date, array } from 'zod';
 
 export const VideoSchema = object({
   id: number(),
-  video_name: number(),
-  video_url: number().nullable(),
+  video_name: string(),
+  video_url: string(),
   created_at: date(),
   updated_at: date(),
 });
