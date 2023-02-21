@@ -1,7 +1,7 @@
 import React, { ButtonHTMLAttributes } from 'react';
 
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  isSubmit?: true;
+  isSubmit?: boolean;
 }
 
 export default function CustomButton({
