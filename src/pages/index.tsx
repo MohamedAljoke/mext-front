@@ -1,8 +1,6 @@
 import Subjects from '@/App/Pages/Subjects/Subjects';
-import Header from '@/App/components/Header/Header';
 import PrivateRoute from '@/App/hook/PrivateRoute';
 import Head from 'next/head';
-import { useState } from 'react';
 
 export default function Home() {
   return (
