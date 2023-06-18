@@ -8,6 +8,7 @@ import LectuerMaterial from './components/Material/LectuerMaterial';
 export default function Lecture() {
   const router = useRouter();
   const lectuerId = router.query.lectuerId as string;
+
   const { lectuer, isLoading, isError, refetch } = useGetLectuer({
     lectuerId,
   });

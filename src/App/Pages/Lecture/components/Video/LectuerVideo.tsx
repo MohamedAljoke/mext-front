@@ -7,7 +7,7 @@ export default function LectuerVideo({ video }: { video?: VideoSchemaType }) {
       {video?.video_url ? (
         <iframe
           className="lg:h-[700px] h-[400px] w-[90%]"
-          src={video.video_url}
+          src={`https://www.youtube.com/embed/${video.video_url}`}
           title={video.video_name}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen

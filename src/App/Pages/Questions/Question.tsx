@@ -53,7 +53,6 @@ export default function Question() {
       });
     }
   };
-  console.log(responseStatus);
   const getQuestionColor = (question: QuestionSchemaType) => {
     const questionColor =
       question.wasCorrect == true || responseStatus[question.id]
