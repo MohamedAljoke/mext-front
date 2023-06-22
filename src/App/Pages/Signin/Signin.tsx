@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import CustomButton from '@/App/shared/common/Button/Button';
 import CustomInput from '@/App/shared/common/Input/Input';
-import React from 'react';
+import React, { useContext } from 'react';
 import { HiOutlineMail } from 'react-icons/hi';
 import { AiOutlineLock } from 'react-icons/ai';
 import Link from 'next/link';
@@ -16,6 +16,7 @@ import { saveToken } from '@/App/utils/constants/tokens';
 import { useRouter } from 'next/router';
 import { popError } from '@/App/components/PopUp/popError';
 import { popSucess } from '@/App/components/PopUp/popSuccess';
+import { AuthContext } from '@/App/context/AuthContext';
 
 export default function Signin() {
   const router = useRouter();
@@ -30,11 +31,15 @@ export default function Signin() {
   const { mutate: mutateLogin } = useMutation(signinService);
 
   const onSubmit: SubmitHandler<LoginSchemaType> = (data) => {
+    const { setUser } = useContext(AuthContext)
     mutateLogin(data, {
       onSuccess: (response) => {
         popSucess('Logged in');
         saveToken(response?.token || '');
         router.push('/');
+        if (response) {
+          setUser({ name: response.name, email: response.email })
+        }
       },
       onError: (error: any) => {
         const errorMessage =

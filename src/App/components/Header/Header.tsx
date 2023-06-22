@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { FiChevronDown } from 'react-icons/fi';
 import { HeaderDiv, menuButton, menuItems } from './styles';
@@ -6,14 +6,17 @@ import Link from 'next/link';
 import { MdOutlineLogout } from 'react-icons/md';
 import { logout } from '@/App/services/mutation/auth.mutation';
 import { popSucess } from '../PopUp/popSuccess';
+import { AuthContext, UserAuthType } from '@/App/context/AuthContext';
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Header({ user }: { user: string }) {
+export default function Header({ user }: { user: UserAuthType }) {
+  const { setUser } = useContext(AuthContext)
   const handleLogout = () => {
     logout();
+    setUser(null)
     popSucess('logout successfully');
     localStorage.clear();
   };
@@ -40,7 +43,7 @@ export default function Header({ user }: { user: string }) {
               data-testid="test-profile-toggle-button"
               className={menuButton}
             >
-              <p className="ml-2 text-white font-semibold text-sm">{user}</p>
+              <p className="ml-2 text-white font-semibold text-sm">{user.name}</p>
               <FiChevronDown className="text-white w-6 h-6" />
             </Menu.Button>
           </div>
