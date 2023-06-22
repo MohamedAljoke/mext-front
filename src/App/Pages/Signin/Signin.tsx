@@ -19,6 +19,7 @@ import { popSucess } from '@/App/components/PopUp/popSuccess';
 import { AuthContext } from '@/App/context/AuthContext';
 
 export default function Signin() {
+  const { setUser } = useContext(AuthContext)
   const router = useRouter();
   const {
     register,
@@ -31,7 +32,6 @@ export default function Signin() {
   const { mutate: mutateLogin } = useMutation(signinService);
 
   const onSubmit: SubmitHandler<LoginSchemaType> = (data) => {
-    const { setUser } = useContext(AuthContext)
     mutateLogin(data, {
       onSuccess: (response) => {
         popSucess('Logged in');

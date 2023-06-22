@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Head from 'next/head';
+import { AuthProvider } from '@/App/context/AuthContext';
 
 const queryClient = new QueryClient();
 
@@ -17,7 +18,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <QueryClientProvider client={queryClient}>
-        <Component {...pageProps} />
+        <AuthProvider>
+          <Component {...pageProps} />
+        </AuthProvider>
         <ToastContainer />
       </QueryClientProvider>
     </>
