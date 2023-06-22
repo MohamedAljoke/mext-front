@@ -10,7 +10,6 @@ interface Props {
 
 const PrivateRoute: React.FC<Props> = ({ children }) => {
   const { user, isLoading } = useContext(AuthContext)
-  console.log(user)
   const router = useRouter();
   useEffect(() => {
     if (!user && !isLoading) {

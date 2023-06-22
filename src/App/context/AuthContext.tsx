@@ -29,10 +29,9 @@ export function AuthProvider({ children }: { children: JSX.Element }) {
     return refreshResponse;
   };
   useEffect(() => {
-    const { 'auth-token': token } = parseCookies()
-
+    const { 'mext-auth-token': token } = parseCookies()
+    setIsLoading(true);
     if (token) {
-      setIsLoading(true);
       refreshToken().then(response => {
         if (response?.email && response.name) {
           setUser({ name: response.name, email: response.email });
@@ -40,14 +39,17 @@ export function AuthProvider({ children }: { children: JSX.Element }) {
           setUser(null)
         }
         saveToken(response?.token || '');
-        setCookie(undefined, 'auth-token', token, {
+        setCookie(undefined, 'mext-auth-token', token, {
           maxAge: 60 * 60 * 24 * 7, //7days
         })
       }).catch((e) => {
+        setIsLoading(false);
         setUser(null)
       }).finally(() => {
         setIsLoading(false);
       })
+    } else {
+      setIsLoading(false)
     }
   }, [])
   return (
