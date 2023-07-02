@@ -12,6 +12,7 @@ const PrivateRoute: React.FC<Props> = ({ children }) => {
   const { user, isLoading } = useContext(AuthContext)
   const router = useRouter();
   useEffect(() => {
+    console.log(user)
     if (!user && !isLoading) {
       router.push('/signin')
     }

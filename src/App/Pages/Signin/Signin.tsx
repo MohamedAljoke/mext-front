@@ -17,6 +17,7 @@ import { useRouter } from 'next/router';
 import { popError } from '@/App/components/PopUp/popError';
 import { popSucess } from '@/App/components/PopUp/popSuccess';
 import { AuthContext } from '@/App/context/AuthContext';
+import cookie from 'cookie';
 
 export default function Signin() {
   const { setUser } = useContext(AuthContext)
@@ -39,6 +40,16 @@ export default function Signin() {
         router.push('/');
         if (response) {
           setUser({ name: response.name, email: response.email })
+          const cookieOptions = {
+            maxAge: 30 * 24 * 60 * 60, // 30 days
+            path: '/',
+          };
+          const cookieValue = cookie.serialize(
+            'mext-auth-token',
+            response.token,
+            cookieOptions
+          );
+          document.cookie = cookieValue;
         }
       },
       onError: (error: any) => {

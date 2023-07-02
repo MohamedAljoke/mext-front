@@ -21,7 +21,7 @@ export function AuthProvider({ children }: { children: JSX.Element }) {
   const [user, setUser] = useState<UserAuthType | null>(null)
 
   const isAuthenticated = !!user;
-  const [isLoading, setIsLoading] = useState(true); //muda para true dps
+  const [isLoading, setIsLoading] = useState(true);
 
   const refreshToken = async () => {
     const refreshResponse = await validateAndRefreshToken({});
@@ -30,6 +30,7 @@ export function AuthProvider({ children }: { children: JSX.Element }) {
   };
   useEffect(() => {
     const { 'mext-auth-token': token } = parseCookies()
+
     setIsLoading(true);
     if (token) {
       refreshToken().then(response => {
@@ -43,6 +44,7 @@ export function AuthProvider({ children }: { children: JSX.Element }) {
           maxAge: 60 * 60 * 24 * 7, //7days
         })
       }).catch((e) => {
+        console.log(e)
         setIsLoading(false);
         setUser(null)
       }).finally(() => {
