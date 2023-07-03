@@ -75,7 +75,7 @@ export default function Question() {
         ) : (
           <>
             <CustomButton
-              customCss="flex items-center"
+              customCss="flex items-start"
               color="bg-[#6EB5D6]"
               onClick={() => {
                 router.back();
