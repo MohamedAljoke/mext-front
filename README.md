@@ -1,4 +1,4 @@
-# My Next App
+# Mext
 
 This is the front app for the mext project (the students page)
 
@@ -7,10 +7,6 @@ This is the front app for the mext project (the students page)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
-- [Deployment](#deployment)
-- [Contributing](#contributing)
-- [License](#license)
-
 
 ## Getting Started
 
@@ -28,17 +24,24 @@ Make sure you have the following software installed before running the app:
    ```shell
    git clone https://github.com/your-username/your-repo.git
 
+   ```
+
 2. Change into the project directory:
 
    ```shell
    cd mext-front
+
+   ```
 
 3. Install the dependencies
 
    ```shell
    npm install
 
+   ```
+
 4. Run the project
 
    ```shell
    npm run dev
+   ```
