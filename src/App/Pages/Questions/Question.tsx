@@ -75,14 +75,12 @@ export default function Question() {
         ) : (
           <>
             <CustomButton
-              customCss="flex items-start"
               color="bg-[#6EB5D6]"
               onClick={() => {
                 router.back();
               }}
               isSubmit={false}
             >
-              <MdArrowBackIos />
               back
             </CustomButton>
             {questions?.map((question, idx) => {
