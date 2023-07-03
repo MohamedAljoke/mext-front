@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
+import QuestionCompnent from './children/QuestionCompnent';
 
 type ResponseStatusType = {
   [key: number]: boolean;
@@ -58,10 +59,11 @@ export default function Question() {
       question.wasCorrect == true || responseStatus[question.id]
         ? 'text-green-600'
         : question.wasCorrect == false || responseStatus[question.id] === false
-        ? 'text-red-500'
-        : 'text-gray-600';
+          ? 'text-red-500'
+          : 'text-gray-600';
     return questionColor;
   };
+
   return (
     <div className="relative w-full">
       <div className="w-full flex flex-col gap-16  justify-center items-center xl:px-28 px-16 py-28 ">
@@ -73,46 +75,16 @@ export default function Question() {
           questions?.map((question, idx) => {
             const questionColor = getQuestionColor(question);
             return (
-              <div
+              <QuestionCompnent
+                idx={idx}
                 key={question.id}
-                className={` w-full bg-white p-6 rounded-lg shadow-defaultShadow flex flex-wrap flex-col ${questionColor}`}
-              >
-                <h1 className="text-xl font-bold mb-4 ">
-                  <span className="mr-2">
-                    {idx + 1}
-                    {')'}
-                  </span>
-                  {question.question_text}
-                </h1>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <ul className=" ml-6">
-                    {question.alternatives.map((alternative, index) => (
-                      <li key={alternative.id} className="mb-2">
-                        <label className="inline-flex items-center  hover:cursor-pointer">
-                          <input
-                            type="radio"
-                            value={alternative.id}
-                            className={`${questionColor} form-radio h-5 w-5 `}
-                            defaultChecked={
-                              alternative.id === question.choosenAnswerId
-                            }
-                            {...register(`question${question.id}`)}
-                          />
-                          <span className="ml-2 text-gray-700">
-                            {alternative.alternative_text}
-                          </span>
-                        </label>
-                      </li>
-                    ))}
-                    <CustomButton
-                      onClick={() => setSelectedQuestion(question.id)}
-                      isSubmit={true}
-                    >
-                      Send
-                    </CustomButton>
-                  </ul>
-                </form>
-              </div>
+                questionColor={questionColor}
+                onSubmit={onSubmit}
+                handleSubmit={handleSubmit}
+                register={register}
+                setSelectedQuestion={setSelectedQuestion}
+                question={question}
+              />
             );
           })
         )}
