@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import QuestionCompnent from './children/QuestionCompnent';
+import { MdArrowBackIos } from 'react-icons/md';
 
 type ResponseStatusType = {
   [key: number]: boolean;
@@ -72,21 +73,35 @@ export default function Question() {
             <Spinner />
           </div>
         ) : (
-          questions?.map((question, idx) => {
-            const questionColor = getQuestionColor(question);
-            return (
-              <QuestionCompnent
-                idx={idx}
-                key={question.id}
-                questionColor={questionColor}
-                onSubmit={onSubmit}
-                handleSubmit={handleSubmit}
-                register={register}
-                setSelectedQuestion={setSelectedQuestion}
-                question={question}
-              />
-            );
-          })
+          <>
+            <CustomButton
+              customCss="flex items-center"
+              color="bg-[#6EB5D6]"
+              onClick={() => {
+                router.back();
+              }}
+              isSubmit={false}
+            >
+              <MdArrowBackIos />
+              back
+            </CustomButton>
+            {questions?.map((question, idx) => {
+              const questionColor = getQuestionColor(question);
+              return (
+                <QuestionCompnent
+                  idx={idx}
+                  key={question.id}
+                  questionColor={questionColor}
+                  onSubmit={onSubmit}
+                  handleSubmit={handleSubmit}
+                  register={register}
+                  setSelectedQuestion={setSelectedQuestion}
+                  question={question}
+                />
+              );
+            })}
+          </>
+
         )}
       </div>
     </div>
